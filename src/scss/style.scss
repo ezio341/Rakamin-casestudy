@@ -53,3 +53,22 @@ body {
     border-radius: #{$i}px
   }
 }
+
+// dropdown
+.dropdown{
+  border-radius: 8px;
+  .dropdown-menu{
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.08);
+  }
+  .btn::after{
+    display: none;
+  }
+  a:hover{
+    @each $variant, $value in $theme-colors {
+      &.hover-#{$variant} {
+        color: $value;
+        background-color: transparent;
+      }
+    }
+  }
+}

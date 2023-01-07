@@ -17,8 +17,8 @@ export default function BoardGroup({boardItem, variant, duration, title}){
           No Task
         </div>
         :
-        boardItem.map(item=>(
-          <div className="mb-2 pb-1">
+        boardItem.map((item, i)=>(
+          <div className="mb-2 pb-1" key={i}>
             <BoardItem title={item.title} progress={item.progress}/>
           </div>
         ))

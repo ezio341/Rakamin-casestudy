@@ -29,8 +29,8 @@ export default function Dashboard(){
       {
         BoardDummy.map((board, i)=>{
           return(
-            <div className='me-3'>
-              <BoardGroup title={board.title} boardItem={board.item} duration={board.duration} variant={board.variant} key={i}/>
+            <div className='me-3' key={i}>
+              <BoardGroup title={board.title} boardItem={board.item} duration={board.duration} variant={board.variant}/>
             </div>
           )
         })
