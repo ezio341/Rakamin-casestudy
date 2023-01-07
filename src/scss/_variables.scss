@@ -7,6 +7,10 @@ $danger-surface: #FFFAFA;
 $success: #43936C;
 $success-surface: #F8FBF9;
 
+$neutral-900: #404040;
+$neutral-40: #E0E0E0;
+$neutral-60: #9E9E9E;
+
 // overrides variables
 $theme-colors:
   (
@@ -17,5 +21,6 @@ $theme-colors:
     "danger": $danger,
     "danger-surface": $danger-surface,
     "success": $success,
-    "success-surface": $success-surface 
+    "success-surface": $success-surface ,
+    "body": $neutral-900
   );

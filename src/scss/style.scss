@@ -1,0 +1,41 @@
+* {
+  font-family: 'NunitoSans', sans-serif;
+  font-size: 16px;
+  box-sizing: border-box
+}
+body {
+  color: $neutral-900;
+}
+
+// button
+.btn{
+  color: #fff;
+  font-weight: 700;
+  &:hover{
+    color: #fff;
+  }
+}
+
+// font size
+@for $i from 1 through 48 {
+  .s-#{$i}{
+    font-size: #{$i}px
+  }
+}
+
+// font weight
+@for $i from 1 through 10 {
+  .font-weight-#{$i}00{
+    font-weight: #{$i}00
+  }
+}
+
+// input
+.form-control{
+  border-radius: 8px;
+  padding: 8px 16px;
+  border: 2px solid $neutral-40;
+  &::placeholder{
+    color: $neutral-60;
+  }
+}

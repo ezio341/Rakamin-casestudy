@@ -5,3 +5,12 @@
 @import "./variables";
 
 @import "~/node_modules/bootstrap/scss/bootstrap";
+
+// fonts
+@import "./fonts/NunitoSans.scss";
+
+// global style
+@import "./style.scss";
+
+// layouts
+@import "./layouts/default.scss";
