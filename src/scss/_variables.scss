@@ -1,0 +1,21 @@
+$primary: #01959F;
+$primary-surface: #F7FEFF;
+$warning: #FA9810;
+$warning-surface: #FFFCF5;
+$danger: #E11428;
+$danger-surface: #FFFAFA;
+$success: #43936C;
+$success-surface: #F8FBF9;
+
+// overrides variables
+$theme-colors:
+  (
+    "primary": $primary,
+    "primary-surface": $primary-surface,
+    "warning": $warning,
+    "warning-surface": $warning-surface,
+    "danger": $danger,
+    "danger-surface": $danger-surface,
+    "success": $success,
+    "success-surface": $success-surface 
+  );
