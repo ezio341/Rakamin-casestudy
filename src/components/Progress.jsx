@@ -6,7 +6,7 @@ export default function Progress({percent}){
     <Row className="align-items-center">
       <Col>
         <span>
-          <ProgressBar now={percent}/>
+          <ProgressBar now={percent} variant={percent===100?'success':'primary'} className="radius-16"/>
         </span>
       </Col>
       <Col xs="auto" md="auto" className="ps-0 pe-1">
