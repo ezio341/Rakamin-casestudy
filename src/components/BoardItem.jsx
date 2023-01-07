@@ -1,26 +1,16 @@
-import { Row, Col, ProgressBar, Image, Button } from "react-bootstrap";
-import Checklist from '../icons/checklist.svg'
+import { Row, Col, Image, Button } from "react-bootstrap";
 import More from '../icons/more-horizontal.svg'
+import Progress from "./Progress";
 
 export default function boardItem({title, progress}){
   return (
     <div className="board-item">
-      <div className="title">
+      <div className="title s-14 font-weight-700">
         {title}
       </div>
-      <Row className="align-items-center">
+      <Row className="align-items-center mt-3">
         <Col>
-          <span>
-            <ProgressBar now={progress}/>
-          </span>
-        </Col>
-        <Col xs="auto" md="auto" className="ps-0 pe-1">
-          {
-            progress === 100 ?
-            <Image src={Checklist} height={16} width={16}/>
-            :
-            <span className="text-neutral-70 s-12 font-weight-400">{progress}%</span>
-          }
+          <Progress percent={progress}/>
         </Col>
         <Col xs="auto" md="auto">
           <Button variant="transparent" className="p-0">
