@@ -25,7 +25,7 @@ export default function Dashboard(){
     }
   ]
   return (
-    <div className='board-container py-5 ps-3 ps-md-0'>
+    <div className='board-container py-4 ps-3 ps-md-0'>
       {
         BoardDummy.map((board, i)=>{
           return(
