@@ -1,4 +1,3 @@
-import {Container} from 'react-bootstrap'
 import BoardGroup from '../components/BoardGroup'
 
 export default function Dashboard(){
@@ -7,7 +6,16 @@ export default function Dashboard(){
       title: 'board 1',
       duration: 'January - March',
       variant: 'success',
-      item: []
+      item: [
+        {
+          title: 'Re-designed the zero-g doggie bags. No more spills!',
+          progress: 100
+        },
+        {
+          title: 'Re-designed the zero-g doggie bags. No more spills! more more and more text',
+          progress: 60
+        }
+      ]
     },
     {
       title: 'board 1',
@@ -17,18 +25,16 @@ export default function Dashboard(){
     }
   ]
   return (
-    <Container>
-      <div className='board-container py-5'>
-        {
-          BoardDummy.map((board, i)=>{
-            return(
-              <div className='me-3'>
-                <BoardGroup title={board.title} boardItem={board.item} duration={board.duration} variant={board.variant} key={i}/>
-              </div>
-            )
-          })
-        }
-      </div>
-    </Container>
+    <div className='board-container py-5 ps-3 ps-md-0'>
+      {
+        BoardDummy.map((board, i)=>{
+          return(
+            <div className='me-3'>
+              <BoardGroup title={board.title} boardItem={board.item} duration={board.duration} variant={board.variant} key={i}/>
+            </div>
+          )
+        })
+      }
+    </div>
   )
 }

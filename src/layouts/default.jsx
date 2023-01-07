@@ -6,7 +6,7 @@ export default function DefaultLayout(props){
     <header className='bg-primary-surface d-flex align-items-center px-3'>
       Kanban Board
     </header>
-      <Container className='content'>
+      <Container className='content px-sm-3 px-0'>
         {props.children}
       </Container>
     <footer className='bg-primary-surface d-flex align-items-center justify-content-center'>

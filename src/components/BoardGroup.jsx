@@ -1,5 +1,5 @@
-import { Button } from "react-bootstrap"
 import BoardTag from "./Tag"
+import BoardItem from "./BoardItem"
 import ButtonIcon from "./ButtonIcon"
 import PlusIcon from '../icons/plus-circle.svg'
 
@@ -12,10 +12,16 @@ export default function BoardGroup({boardItem, variant, duration, title}){
       </div>
       {
         /* if board item empty */
-        !boardItem.length &&
+        !boardItem.length ?
         <div className="px-3 py-2 bg-neutral-20 s-14 font-weight-400 radius-4 border border-neutral-40 text-neutral-70">
           No Task
         </div>
+        :
+        boardItem.map(item=>(
+          <div className="mb-2 pb-1">
+            <BoardItem title={item.title} progress={item.progress}/>
+          </div>
+        ))
       }
       <div className="mt-2">
       <ButtonIcon variant="transparent" text="New Task" icon={PlusIcon} noPadding></ButtonIcon>
