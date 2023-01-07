@@ -1,26 +1,40 @@
 $primary: #01959F;
 $primary-surface: #F7FEFF;
+$primary-border: #4DB5BC;
 $warning: #FA9810;
 $warning-surface: #FFFCF5;
+$warning-border: #FEEABC;
 $danger: #E11428;
 $danger-surface: #FFFAFA;
+$danger-border: #F5B1B7;
 $success: #43936C;
 $success-surface: #F8FBF9;
+$success-border: #B8DBCA;
 
-$neutral-900: #404040;
+$neutral-90: #404040;
+$neutral-20: #FAFAFA;
 $neutral-40: #E0E0E0;
 $neutral-60: #9E9E9E;
+$neutral-70: #757575;
 
 // overrides variables
 $theme-colors:
   (
     "primary": $primary,
     "primary-surface": $primary-surface,
+    "primary-border": $primary-border,
     "warning": $warning,
     "warning-surface": $warning-surface,
+    "warning-border": $warning-border,
     "danger": $danger,
     "danger-surface": $danger-surface,
+    "danger-border": $danger-border,
     "success": $success,
     "success-surface": $success-surface ,
-    "body": $neutral-900
+    "success-border": $success-border ,
+    "body": $neutral-90,
+    "neutral-20": $neutral-20,
+    "neutral-40": $neutral-40,
+    "neutral-70": $neutral-70,
+    "neutral-90": $neutral-90
   );

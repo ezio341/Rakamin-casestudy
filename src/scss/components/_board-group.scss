@@ -1,0 +1,15 @@
+.board-group{
+  padding: 1em;
+  border-radius: 4px;
+  border: 1px solid;
+  width: 326px;
+  @media (max-width: (map-get($grid-breakpoints, sm))) {
+    width: calc(100vw - 80px);
+  }
+  @each $variant, $value in $theme-colors {
+    &.#{$variant} {
+      background-color: variable_lookup($variant, surface);
+      border-color: variable_lookup($variant, 'border');
+    }
+  }
+}

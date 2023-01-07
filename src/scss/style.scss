@@ -4,7 +4,7 @@
   box-sizing: border-box
 }
 body {
-  color: $neutral-900;
+  color: $neutral-90;
 }
 
 // button
@@ -37,5 +37,19 @@ body {
   border: 2px solid $neutral-40;
   &::placeholder{
     color: $neutral-60;
+  }
+}
+
+// board container
+.board-container{
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: scroll;
+}
+
+// radius
+@for $i from 1 through 16 {
+  .radius-#{$i}{
+    border-radius: #{$i}px
   }
 }

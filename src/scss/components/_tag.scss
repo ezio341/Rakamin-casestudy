@@ -1,0 +1,14 @@
+.tag{
+  display: inline-block;
+  height: 24px;
+  border-radius: 4px;
+  padding: 2px 8px 2px 8px;
+  border: 1px solid;
+  @each $variant, $value in $theme-colors {
+    &.#{$variant} {
+      color: $value;
+      background-color: variable_lookup($variant, surface);
+      border-color: variable_lookup($variant, 'border');
+    }
+  }
+}

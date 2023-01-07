@@ -3,6 +3,7 @@
 @import "~/node_modules/bootstrap/scss/variables";
 
 @import "./variables";
+@import "./functions";
 
 @import "~/node_modules/bootstrap/scss/bootstrap";
 
@@ -14,3 +15,4 @@
 
 // layouts
 @import "./layouts/default.scss";
+@import "./components/index.scss";

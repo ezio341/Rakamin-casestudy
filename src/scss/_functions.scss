@@ -1,0 +1,9 @@
+@function variable_lookup($colour, $suffix: '') {
+  $value: null;
+  @if ( $suffix != '' and map-has-key($theme-colors, unquote($colour+'-'+$suffix)) ) {
+    $value: map-get($theme-colors, unquote($colour+'-'+$suffix));
+  } @else if ( map-has-key($theme-colors, unquote($colour)) ) {
+    $value: map-get($theme-colors, unquote($colour));
+  }
+  @return $value;
+}
