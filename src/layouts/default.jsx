@@ -22,8 +22,10 @@ export default function DefaultLayout(){
         <AuthStatus/>
       </div>
     </header>
-      <ButtonIcon onClick={()=>setCreateGroupModalShow(true)} className="mt-3 ms-3 d-block d-sm-none" icon={PlusIcon} iconH={12} iconW={12} text="Add New Group" variant="primary"/>
       <Container fluid className='content px-sm-3 px-0'>
+        <div className='pt-3 ps-3 d-block d-sm-none'>
+        <ButtonIcon onClick={()=>setCreateGroupModalShow(true)} icon={PlusIcon} iconH={12} iconW={12} text="Add New Group" variant="primary"/>
+        </div>
         {/* {props.children} */}
         <Outlet/>
       </Container>
