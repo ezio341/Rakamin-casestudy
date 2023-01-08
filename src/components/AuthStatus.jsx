@@ -1,25 +1,27 @@
 import { useNavigate } from "react-router-dom"
 import { Dropdown } from "react-bootstrap"
+import { useDispatch, useSelector } from "react-redux"
+import { logout } from "../features/auth/authSlice"
 
 export default function AuthStatus () {
-  let auth = {user: null}
   let navigate = useNavigate()
+  const dispatch = useDispatch()
+  const {userToken} = useSelector(state=>state.auth)
 
-  if(!auth.user){
+  if(!userToken){
     return <p>You are not logged in</p>
   }
 
   const onLogout = () =>{
-    auth.signout()
-    navigate('/')
+    dispatch(logout())
   }
   return (
     <Dropdown>
-      <Dropdown.Toggle variant="transparent" className="p-0">
+      <Dropdown.Toggle variant="success">
         User
       </Dropdown.Toggle>
       <Dropdown.Menu>
-        <Dropdown.Item onClick={onLogout}>
+        <Dropdown.Item as='button' onClick={()=>onLogout()}>
           Logout
         </Dropdown.Item>
       </Dropdown.Menu>

@@ -1,11 +1,26 @@
-import {Form, Container, Row, Col, Button} from 'react-bootstrap'
-import { useLocation, useNavigate } from 'react-router-dom'
+import {Form, Container, Row, Col, Button, Alert, Spinner} from 'react-bootstrap'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { login } from '../features/auth/authActions'
+import { useEffect, useState } from 'react'
 
 export default function Login(){
   let navigate = useNavigate()
-  let location = useLocation()
+  
+  const {loading, error, userToken} = useSelector(
+    (state) => state.auth
+  )
+  useEffect(()=>{
+    if(userToken && !loading){
+      navigate('/')
+    }
+  },[userToken, navigate, loading])
 
-  let from = location.state?.from?.pathname || "/"
+  const dispatch = useDispatch()
+  const [errorAlert, setErrorAlert] = useState(error)
+  useEffect(()=>{
+    setErrorAlert(error)
+  }, [error])
 
   const handleSubmit = (evt) =>{
     evt.preventDefault()
@@ -14,12 +29,18 @@ export default function Login(){
     if(!form.checkValidity()){
       evt.stopPropagation()
     }else{
-      console.log('email')
+      dispatch(login({email, password}))
     }
   }
   return (
-    <Container>
-      <Row className='justify-content-center py-5'>
+    <Container className='py-5'>
+      <div className='text-center s-48 font-weight-700 pb-5'>
+        Kanban Board
+      </div>
+        <Alert show={!!errorAlert} variant='danger' onClose={()=>setErrorAlert(null)} dismissible>
+          {errorAlert}
+        </Alert>
+      <Row className='justify-content-center pb-5'>
         <Col md="6" cols="12">
           <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3" controlId="formGroupEmail">
@@ -30,7 +51,13 @@ export default function Login(){
               <Form.Label className='s-12 font-weight-700'>Password</Form.Label>
               <Form.Control type="password" placeholder="Password" />
             </Form.Group>
-            <Button type='submit' variant='primary'>Sign In</Button>
+            <Button className='d-flex align-items-center gap-1' type='submit' variant='primary'>
+              Sign In
+              {
+                loading &&
+                <Spinner size='sm' variant='white'/>
+              }
+            </Button>
           </Form>
         </Col>
       </Row>

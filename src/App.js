@@ -11,13 +11,9 @@ import Login from './pages/Login';
 function App() {
   let routes = useRoutes([
     {path: '/login', element: <Login />},
-    {element: <RequireAuth />, children:[
-      {element: <DefaultLayout />, children:[
-        {path: '/', element: (
-          <RequireAuth>
-            <Dashboard />
-          </RequireAuth>
-        )}
+    {element: <DefaultLayout />, children:[
+      {element: <RequireAuth />, children:[
+        {path: '/', element:<Dashboard />}
       ]}
     ]}
   ])
