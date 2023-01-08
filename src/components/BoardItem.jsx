@@ -70,9 +70,6 @@ export default function BoardItem({title, progress}){
           <Progress percent={progress}/>
         </Col>
         <Col xs="auto" md="auto">
-            {/* <Button variant="transparent" className="p-0">
-              
-            </Button> */}
           <Dropdown>
             <Dropdown.Toggle variant="transparent" className="p-0">
               <Image src={More} height={24} width={24}/>
@@ -114,7 +111,7 @@ export default function BoardItem({title, progress}){
         closable
       />
 
-      {/* Modal Create Task */}
+      {/* Modal Edit Task */}
       <ModalCustom 
         Body={
           <Form>
@@ -124,7 +121,7 @@ export default function BoardItem({title, progress}){
           </Form.Group>
           <Form.Group className="mb-3" controlId="progress">
             <Form.Label className='s-12 font-weight-700'>Progress</Form.Label>
-            <Form.Control type="number" max={100} min placeholder="70%" />
+            <Form.Control type="number" max={100} min={0} placeholder="70%" />
           </Form.Group>
         </Form>
         }

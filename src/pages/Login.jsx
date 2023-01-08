@@ -33,7 +33,7 @@ export default function Login(){
     }
   }
   return (
-    <Container className='py-5'>
+    <Container className='py-5 px-4'>
       <div className='text-center s-48 font-weight-700 pb-5'>
         Kanban Board
       </div>
@@ -54,7 +54,7 @@ export default function Login(){
             <Button className='d-flex align-items-center gap-1' type='submit' variant='primary'>
               Sign In
               {
-                loading &&
+                loading && 
                 <Spinner size='sm' variant='white'/>
               }
             </Button>

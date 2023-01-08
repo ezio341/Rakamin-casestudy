@@ -42,7 +42,7 @@ export default function BoardGroup({boardItem, variant, duration, title}){
           </Form.Group>
           <Form.Group className="mb-3" controlId="progress">
             <Form.Label className='s-12 font-weight-700'>Progress</Form.Label>
-            <Form.Control type="number" max={100} min placeholder="70%" />
+            <Form.Control type="number" max={100} min={0} placeholder="70%" />
           </Form.Group>
         </Form>
         }

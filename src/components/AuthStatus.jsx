@@ -1,10 +1,8 @@
-import { useNavigate } from "react-router-dom"
 import { Dropdown } from "react-bootstrap"
 import { useDispatch, useSelector } from "react-redux"
 import { logout } from "../features/auth/authSlice"
 
 export default function AuthStatus () {
-  let navigate = useNavigate()
   const dispatch = useDispatch()
   const {userToken} = useSelector(state=>state.auth)
 
