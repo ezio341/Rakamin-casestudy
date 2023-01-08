@@ -1,4 +1,4 @@
-import { Row, Col, Image, Dropdown, Button } from "react-bootstrap";
+import { Row, Col, Image, Dropdown, Button, Form } from "react-bootstrap";
 import More from '../icons/more-horizontal.svg'
 import Progress from "./Progress";
 import ArrowRight from "../icons/arrow-right.svg"
@@ -15,6 +15,7 @@ import ModalCustom from "./ModalCustom";
 
 export default function BoardItem({title, progress}){ 
   const [deleteModalShow, setDeleteModalShow] = useState(false)
+  const [EditTaskModalShow, setEditTaskModalShow] = useState(false)
   const [settings, setSettings] = useState([
     {
       text: 'Move Right',
@@ -38,7 +39,7 @@ export default function BoardItem({title, progress}){
       iconAlt: EditPrimary,
       active: false,
       activeVariant: 'primary',
-      onClick: ()=>{console.log('move right')}
+      onClick: ()=>{setEditTaskModalShow(true)}
     },
     {
       text: 'Delete',
@@ -110,6 +111,32 @@ export default function BoardItem({title, progress}){
         show={deleteModalShow}
         setShow={setDeleteModalShow}
         title="Delete Task"
+        closable
+      />
+
+      {/* Modal Create Task */}
+      <ModalCustom 
+        Body={
+          <Form>
+          <Form.Group className="mb-3" controlId="taskName">
+            <Form.Label className='s-12 font-weight-700'>Task Name</Form.Label>
+            <Form.Control type="text" placeholder="Type your task" />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="progress">
+            <Form.Label className='s-12 font-weight-700'>Progress</Form.Label>
+            <Form.Control type="number" max={100} min placeholder="70%" />
+          </Form.Group>
+        </Form>
+        }
+        Footer={
+          <>
+            <Button onClick={()=>setEditTaskModalShow(false)} className="me-2 m-0 text-neutral-90 shadow" variant="white">Cancel</Button>
+            <Button className="m-0 shadow">Save Task</Button>
+          </>
+        }
+        show={EditTaskModalShow}
+        setShow={setEditTaskModalShow}
+        title="Create Task"
         closable
       />
     </div>
