@@ -2,31 +2,43 @@ import BoardTag from "./Tag"
 import BoardItem from "./BoardItem"
 import ButtonIcon from "./ButtonIcon"
 import PlusIcon from '../icons/plus-circle.svg'
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import ModalCustom from "./ModalCustom"
 import { Button, Form } from "react-bootstrap"
+import { useDispatch, useSelector } from "react-redux"
+import { getTodoItems } from "../features/todoItem/todoItemAction"
 
-export default function BoardGroup({boardItem, variant, duration, title}){
+export default function BoardGroup({id, variant, description, title}){
   const [createTaskShow, setCreateTaskModalShow] = useState(false)
+  const [boardItem, setBoardItem] = useState({})
+
+  const {data, loading, error} = useSelector(state=>state.todoItem)
+  const {userToken} = useSelector(state=>state.auth)
+  const dispatch = useDispatch()
+  useEffect(()=>{
+    if(!data.length && userToken){
+      dispatch(getTodoItems({groupId: id, bearerToken: userToken}))
+    }
+  },[])
 
   return (
     <div className={`board-group ${variant}`}>
       <BoardTag text={title} variant={variant}/>
       <div className="s-12 font-weight-700 py-2 ms-1">
-        {duration}
+        {description}
       </div>
       {
         /* if board item empty */
-        // !boardItem.length ?
+        !data.filter(item=>item.todo_id===id).length ?
         <div className="px-3 py-2 bg-neutral-20 s-14 font-weight-400 radius-4 border border-neutral-40 text-neutral-70">
           No Task
         </div>
-        // :
-        // boardItem.map((item, i)=>(
-        //   <div className="mb-2 pb-1" key={i}>
-        //     <BoardItem title={item.title} progress={item.progress}/>
-        //   </div>
-        // ))
+        :
+        data.filter(item=>item.todo_id===id).map((item, i)=>(
+          <div className="mb-2 pb-1" key={i}>
+            <BoardItem title={item.name} progress={item.progress_percentage}/>
+          </div>
+        ))
       }
       <div className="mt-2">
       <ButtonIcon onClick={()=>setCreateTaskModalShow(true)} variant="transparent" text="New Task" icon={PlusIcon} noPadding/>

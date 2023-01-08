@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { getTodos } from './todoGroupAction'
+import { getTodoItems } from './todoItemAction'
 
 const initialState = {
   loading: false,
@@ -8,28 +8,27 @@ const initialState = {
 }
 
 const todoGroupSlice = createSlice({
-  name: 'todoGroup',
+  name: 'todoItem',
   initialState,
-  reducers: {
-    setData: (data, state) => {
-      state.data = data
-    }
-  },
+  reducers: {},
   extraReducers: {
-    [getTodos.pending]: (state) => {
+    [getTodoItems.pending]: (state) => {
       state.loading = true
+      state.data = []
       state.error = null
     },
-    [getTodos.fulfilled]: (state, { payload }) => {
+    [getTodoItems.fulfilled]: (state, { payload }) => {
       state.loading = false
-      state.data = payload
+      if(payload.length){
+        state.data.push(...payload)
+      }
+      // state.data = payload
     },
-    [getTodos.rejected]: (state, { payload }) => {
+    [getTodoItems.rejected]: (state, { payload }) => {
       state.loading = false
       state.error = payload
     },
   },
 })
 
-export const {setData} = todoGroupSlice.actions
 export default todoGroupSlice.reducer

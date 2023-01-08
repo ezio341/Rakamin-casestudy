@@ -2,9 +2,10 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 
 const apiURL = process.env.REACT_APP_API_URL
 
-export const getTodos = createAsyncThunk(
-  'todoGroup/getTodos',
-  async (bearerToken, { rejectWithValue }) => {
+export const getTodoItems = createAsyncThunk(
+  'todoItem/getTodoItems',
+  async ({groupId, bearerToken}, { rejectWithValue }) => {
+    let collection = []
     try {
       const config = {
         headers: {
@@ -13,7 +14,7 @@ export const getTodos = createAsyncThunk(
         method: 'GET'
       }
       const res = await fetch(
-        `${apiURL}/todos`,
+        `${apiURL}/todos/${groupId}/items`,
         config
       ).then(res=>res.json())
 
