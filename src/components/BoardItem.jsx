@@ -97,7 +97,7 @@ export default function BoardItem({title, progress}){
         </Col>
       </Row>
 
-      {/* Modal delete action */}
+      {/* Modal delete item */}
       <ModalCustom 
         Body={'Are you sure want to delete this task? your action can’t be reverted.'}
         Footer={
