@@ -1,4 +1,4 @@
-import { Row, Col, Image, Dropdown } from "react-bootstrap";
+import { Row, Col, Image, Dropdown, Button } from "react-bootstrap";
 import More from '../icons/more-horizontal.svg'
 import Progress from "./Progress";
 import ArrowRight from "../icons/arrow-right.svg"
@@ -9,9 +9,12 @@ import ArrowRightPrimary from "../icons/arrow-right-primary.svg"
 import ArrowLeftPrimary from "../icons/arrow-left-primary.svg"
 import EditPrimary from "../icons/edit-primary.svg"
 import DeleteDanger from "../icons/bin-danger.svg"
+import AlertDanger from "../icons/alert-danger.svg"
 import { useState } from "react";
+import ModalCustom from "./ModalCustom";
 
-export default function BoardItem({title, progress}){
+export default function BoardItem({title, progress}){ 
+  const [deleteModalShow, setDeleteModalShow] = useState(false)
   const [settings, setSettings] = useState([
     {
       text: 'Move Right',
@@ -43,7 +46,7 @@ export default function BoardItem({title, progress}){
       iconAlt: DeleteDanger,
       active: false,
       activeVariant: 'danger',
-      onClick: ()=>{console.log('move right')}
+      onClick: ()=>setDeleteModalShow(true)
     },
 
   ])
@@ -93,6 +96,22 @@ export default function BoardItem({title, progress}){
           </Dropdown>
         </Col>
       </Row>
+
+      {/* Modal delete action */}
+      <ModalCustom 
+        Body={'Are you sure want to delete this task? your action can’t be reverted.'}
+        Footer={
+          <>
+            <Button onClick={()=>setDeleteModalShow(false)} className="me-2 m-0 text-neutral-90 shadow" variant="white">Cancel</Button>
+            <Button className="m-0 shadow" variant="danger">Delete</Button>
+          </>
+        }
+        HeaderIcon={AlertDanger}
+        show={deleteModalShow}
+        setShow={setDeleteModalShow}
+        title="Delete Task"
+        closable
+      />
     </div>
   )
 }
