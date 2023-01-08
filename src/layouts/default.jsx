@@ -3,6 +3,7 @@ import ButtonIcon from '../components/ButtonIcon'
 import PlusIcon from '../icons/plus.svg'
 import ModalCustom from '../components/ModalCustom'
 import { useState } from 'react'
+import { Outlet } from 'react-router-dom'
 
 export default function DefaultLayout(props){
   const [createGroupModalShow, setCreateGroupModalShow] = useState(false)
@@ -16,7 +17,8 @@ export default function DefaultLayout(props){
       <ButtonIcon onClick={()=>setCreateGroupModalShow(true)} className="px-3 py-1 radius-8" icon={PlusIcon} iconH={12} iconW={12} text="Add New Group" variant="primary"/>
     </header>
       <Container fluid className='content px-sm-3 px-0'>
-        {props.children}
+        {/* {props.children} */}
+        {Outlet}
       </Container>
     <footer className='bg-primary-surface d-flex align-items-center justify-content-center'>
       developed by Arga
