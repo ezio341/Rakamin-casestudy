@@ -1,36 +1,27 @@
+import { useDispatch, useSelector } from 'react-redux'
 import BoardGroup from '../components/BoardGroup'
+import { useEffect } from 'react'
+import { getTodos } from '../features/todoGroup/todoGroupAction'
 
 export default function Dashboard(){
-  const BoardDummy = [
-    {
-      title: 'board 1',
-      duration: 'January - March',
-      variant: 'success',
-      item: [
-        {
-          title: 'Re-designed the zero-g doggie bags. No more spills!',
-          progress: 100
-        },
-        {
-          title: 'Re-designed the zero-g doggie bags. No more spills! more more and more text',
-          progress: 60
-        }
-      ]
-    },
-    {
-      title: 'board 1',
-      duration: 'January - March',
-      variant: 'primary',
-      item: []
+  const {list, loading, error} = useSelector(state=>state.todoGroup)
+  const {userToken} = useSelector(state=>state.auth)
+  const dispatch = useDispatch()
+  useEffect(()=>{
+    if(!list.length && userToken){ 
+      console.log('asd')
+      dispatch(getTodos(userToken))
     }
-  ]
+  }, [list, dispatch, userToken])
+  const variants = ['primary', 'success', 'warning', 'danger']
   return (
     <div className='board-container py-4 ps-3 ps-md-0'>
       {
-        BoardDummy.map((board, i)=>{
+        list &&
+        list.map((board, i)=>{
           return(
             <div className='me-3' key={i}>
-              <BoardGroup title={board.title} boardItem={board.item} duration={board.duration} variant={board.variant}/>
+              <BoardGroup title={board.title} duration={board.description} variant={variants[Math.floor((Math.random() * 4))]}/>
             </div>
           )
         })

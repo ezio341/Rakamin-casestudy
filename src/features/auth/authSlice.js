@@ -31,7 +31,7 @@ const authSlice = createSlice({
     [login.fulfilled]: (state, { payload }) => {
       state.loading = false
       state.userInfo = payload
-      state.userToken = payload?.auth_token
+      state.userToken = payload.auth_token
     },
     [login.rejected]: (state, { payload }) => {
       state.loading = false
