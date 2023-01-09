@@ -33,7 +33,7 @@ export const getTodos = createAsyncThunk(
 )
 
 export const createTodoGroup = createAsyncThunk(
-  'todoItem/createTodoGroup',
+  'todoGroup/createTodoGroup',
   async ({bearerToken, data}, { rejectWithValue }) => {
     try {
       const config = {

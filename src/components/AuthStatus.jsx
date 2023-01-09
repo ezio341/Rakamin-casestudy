@@ -1,8 +1,8 @@
 import { Dropdown } from "react-bootstrap"
 import { useDispatch, useSelector } from "react-redux"
 import { logout } from "../features/auth/authSlice"
-import groupSlice from "../features/todoGroup/todoGroupSlice"
-import itemSlice from "../features/todoItem/todoItemSlice"
+import {resetGroup} from "../features/todoGroup/todoGroupSlice"
+import {resetItem} from "../features/todoItem/todoItemSlice"
 
 export default function AuthStatus () {
   const dispatch = useDispatch()
@@ -13,8 +13,8 @@ export default function AuthStatus () {
   }
 
   const onLogout = () =>{
-    dispatch(groupSlice.setData([]))
-    dispatch(itemSlice.setData([]))
+    dispatch(resetGroup())
+    dispatch(resetItem())
     dispatch(logout())
   }
   return (

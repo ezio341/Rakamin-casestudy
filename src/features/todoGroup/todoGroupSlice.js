@@ -11,8 +11,8 @@ const todoGroupSlice = createSlice({
   name: 'todoGroup',
   initialState,
   reducers: {
-    setData: (data, state) => {
-      state.data = data
+    resetGroup: (state) => {
+      state.data = []
     }
   },
   extraReducers: {
@@ -46,5 +46,5 @@ const todoGroupSlice = createSlice({
   },
 })
 
-export const {setData} = todoGroupSlice.actions
+export const {resetGroup} = todoGroupSlice.actions
 export default todoGroupSlice.reducer
