@@ -12,6 +12,7 @@ export default function Dashboard(){
     if(!data.length && userToken){ 
       dispatch(getTodos(userToken))
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
   const variants = ['primary', 'success', 'warning', 'danger']
   return (

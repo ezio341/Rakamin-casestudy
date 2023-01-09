@@ -20,6 +20,7 @@ export default function BoardGroup({id, variant, description, title}){
         10
       )
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
   const onClickSaveTask = (evt)=>{
     evt.preventDefault()
