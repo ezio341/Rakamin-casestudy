@@ -13,10 +13,12 @@ import AlertDanger from "../icons/alert-danger.svg"
 import { useState } from "react";
 import ModalCustom from "./ModalCustom";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteTodoItems, editTodoItems, getTodoItems } from "../features/todoItem/todoItemAction";
-import { getTodos } from "../features/todoGroup/todoGroupAction";
+import { deleteTodoItems, editTodoItems, moveTodoItems } from "../features/todoItem/todoItemAction";
 
 export default function BoardItem({title, progress, groupId, itemId}){ 
+  const dispatch = useDispatch()
+  const {userToken} = useSelector(state=>state.auth)
+  const todoGroup = useSelector(state=>state.todoGroup)
   const [deleteModalShow, setDeleteModalShow] = useState(false)
   const [EditTaskModalShow, setEditTaskModalShow] = useState(false)
   const [settings, setSettings] = useState([
@@ -26,7 +28,13 @@ export default function BoardItem({title, progress, groupId, itemId}){
       iconAlt: ArrowRightPrimary,
       active: false,
       activeVariant: 'primary',
-      onClick: ()=>{console.log('move right')}
+      onClick: ()=>{
+        dispatch(moveTodoItems({
+          groupId, itemId, bearerToken: userToken,
+          targetTodoId: todoGroup.data[todoGroup.data.findIndex(data=>data.id===groupId)+1].id
+        }))
+      },
+      disabled: todoGroup.data.findIndex(item=>item.id===groupId)===todoGroup.data.length -1
     },
     {
       text: 'Move Left',
@@ -34,7 +42,13 @@ export default function BoardItem({title, progress, groupId, itemId}){
       iconAlt: ArrowLeftPrimary,
       active: false,
       activeVariant: 'primary',
-      onClick: ()=>{console.log('move right')}
+      onClick: ()=>{
+        dispatch(moveTodoItems({
+          groupId, itemId, bearerToken: userToken,
+          targetTodoId: todoGroup.data[todoGroup.data.findIndex(data=>data.id===groupId)-1].id
+        }))
+      },
+      disabled: todoGroup.data.findIndex(item=>item.id===groupId)===0
     },
     {
       text: 'Edit',
@@ -42,7 +56,8 @@ export default function BoardItem({title, progress, groupId, itemId}){
       iconAlt: EditPrimary,
       active: false,
       activeVariant: 'primary',
-      onClick: ()=>{setEditTaskModalShow(true)}
+      onClick: ()=>{setEditTaskModalShow(true)},
+      disabled: false
     },
     {
       text: 'Delete',
@@ -50,7 +65,8 @@ export default function BoardItem({title, progress, groupId, itemId}){
       iconAlt: DeleteDanger,
       active: false,
       activeVariant: 'danger',
-      onClick: ()=>setDeleteModalShow(true)
+      onClick: ()=>setDeleteModalShow(true),
+      disabled: false
     },
 
   ])
@@ -63,9 +79,6 @@ export default function BoardItem({title, progress, groupId, itemId}){
     })
     setSettings(newSettings)
   }
-
-  const dispatch = useDispatch()
-  const {userToken} = useSelector(state=>state.auth)
 
   const onClickSaveTask = (evt)=>{
     evt.preventDefault()
@@ -114,6 +127,7 @@ export default function BoardItem({title, progress, groupId, itemId}){
                   onClick={(e)=>setting.onClick(e)} 
                   onMouseEnter={()=>{swapSetting(i, {...setting, active: true})}}
                   onMouseLeave={()=>{setSettings(settings.map(setting=>({...setting, active: false})))}}
+                  disabled={setting.disabled}
                   key={i}>
                     <span className="me-2">
                       <Image src={setting.active? setting.iconAlt: setting.icon}/>

@@ -78,6 +78,7 @@ export const editTodoItems = createAsyncThunk(
         },
         method: 'PATCH',
         body: JSON.stringify({
+          "name": data.name,
           "progress_percentage": data.progress_percentage
         })
       }
@@ -120,6 +121,40 @@ export const deleteTodoItems = createAsyncThunk(
       }
       throw Error(res.message)
       
+    } catch (error) {
+      // return custom error message from backend if present
+      if (error.response && error.response.data.message) {
+        return rejectWithValue(error.response.data.message)
+      } else {
+        return rejectWithValue(error.message)
+      }
+    }
+  }
+)
+
+export const moveTodoItems = createAsyncThunk(
+  'todoItem/moveTodoItems',
+  async ({groupId, bearerToken, targetTodoId, itemId}, { rejectWithValue }) => {
+    try {
+      const config = {
+        headers: {
+          'Authorization': `Bearer ${bearerToken}`,
+          'Content-Type': 'application/json'
+        },
+        method: 'PATCH',
+        body: JSON.stringify({
+          "target_todo_id": targetTodoId
+        })
+      }
+      const res = await fetch(
+        `${apiURL}/todos/${groupId}/items/${itemId}`,
+        config
+      ).then(res=>res.json())
+
+      if(res){
+        return res
+      }
+      throw Error(res.message)
     } catch (error) {
       // return custom error message from backend if present
       if (error.response && error.response.data.message) {

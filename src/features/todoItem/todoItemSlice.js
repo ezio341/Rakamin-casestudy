@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { getTodoItems, createTodoItems, editTodoItems, deleteTodoItems } from './todoItemAction'
+import { getTodoItems, createTodoItems, editTodoItems, deleteTodoItems, moveTodoItems } from './todoItemAction'
 
 const initialState = {
   loading: false,
@@ -70,6 +70,22 @@ const todoGroupSlice = createSlice({
       state.loading = false
       state.error = payload
     },
+    
+    // move toto
+    [moveTodoItems.pending]: (state) => {
+      state.loading = true
+      state.error = null
+    },
+    [moveTodoItems.fulfilled]: (state, { payload }) => {
+      state.loading = false
+      state.data = state.data.filter(item=>item.id!==payload)
+      state.data[state.data.findIndex(item=>item.id===payload.id)] = payload
+    },
+    [moveTodoItems.rejected]: (state, { payload }) => {
+      state.loading = false
+      state.error = payload
+    },
+    
   },
 })
 

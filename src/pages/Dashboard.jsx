@@ -1,10 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux'
 import BoardGroup from '../components/BoardGroup'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { getTodos } from '../features/todoGroup/todoGroupAction'
 
 export default function Dashboard(){
-  const {data, loading, error} = useSelector(state=>state.todoGroup)
+  const {data} = useSelector(state=>state.todoGroup)
   const {userToken} = useSelector(state=>state.auth)
   const dispatch = useDispatch()
   
@@ -17,7 +17,7 @@ export default function Dashboard(){
   return (
     <div className='board-container py-4 ps-3 ps-md-0'>
       {
-        data.length &&
+        data.length?
         data.map((board, i)=>{
           return(
             <div className='me-3' key={i}>
@@ -25,6 +25,8 @@ export default function Dashboard(){
             </div>
           )
         })
+        :
+        ''
       }
     </div>
   )

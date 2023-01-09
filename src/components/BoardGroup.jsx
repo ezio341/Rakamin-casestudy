@@ -7,13 +7,10 @@ import ModalCustom from "./ModalCustom"
 import { Button, Form } from "react-bootstrap"
 import { useDispatch, useSelector } from "react-redux"
 import { createTodoItems, getTodoItems } from "../features/todoItem/todoItemAction"
-import { getTodos } from "../features/todoGroup/todoGroupAction"
 
 export default function BoardGroup({id, variant, description, title}){
   const [createTaskShow, setCreateTaskModalShow] = useState(false)
-  const {data, loading, error} = useSelector(state=>state.todoItem)
-  const group = useSelector(state=>state.todoGroup)
-  const groupData = group.data
+  const {data} = useSelector(state=>state.todoItem)
   const {userToken} = useSelector(state=>state.auth)
   const dispatch = useDispatch()
   useEffect(()=>{
