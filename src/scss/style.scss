@@ -42,8 +42,17 @@ body {
   border-radius: 8px;
   padding: 8px 16px;
   border: 2px solid $neutral-40;
+  font-size: .875em;
   &::placeholder{
     color: $neutral-60;
+  }
+  &:not(:placeholder-shown){
+    border-color: $primary;
+  }
+  transition: all .3s;
+  &:focus{
+    box-shadow: none;
+    border: 3px solid $primary-focus;
   }
 }
 
