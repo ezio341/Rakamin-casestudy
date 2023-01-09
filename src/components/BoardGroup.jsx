@@ -17,7 +17,7 @@ export default function BoardGroup({id, variant, description, title}){
     if(!data.length && userToken){
       setTimeout(
         ()=>dispatch(getTodoItems({groupId: id, bearerToken: userToken})),
-        50
+        10
       )
     }
   },[])

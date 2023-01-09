@@ -70,6 +70,7 @@ export default function BoardItem({title, progress, groupId, itemId}){
     },
 
   ])
+
   const swapSetting = (id, obj) =>{
     let newSettings = settings.map((setting, i)=>{
       if(id===i){
@@ -108,7 +109,7 @@ export default function BoardItem({title, progress, groupId, itemId}){
   return (
     <div className="board-item">
       <div className="title s-14 font-weight-700">
-        {title}
+        {title} item {itemId} / group {groupId}
       </div>
       <Row className="align-items-center mt-3">
         <Col>

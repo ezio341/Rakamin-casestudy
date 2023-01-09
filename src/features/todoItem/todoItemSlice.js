@@ -4,7 +4,8 @@ import { getTodoItems, createTodoItems, editTodoItems, deleteTodoItems, moveTodo
 const initialState = {
   loading: false,
   error: null,
-  data: []
+  data: [],
+  temp: []
 }
 
 const todoGroupSlice = createSlice({
@@ -75,15 +76,21 @@ const todoGroupSlice = createSlice({
       state.error = payload
     },
     
-    // move toto
+    // move todo
     [moveTodoItems.pending]: (state) => {
       state.loading = true
+      state.temp = state.data
+      state.data = []
       state.error = null
     },
     [moveTodoItems.fulfilled]: (state, { payload }) => {
       state.loading = false
-      state.data = state.data.filter(item=>item.id!==payload)
-      state.data[state.data.findIndex(item=>item.id===payload.id)] = payload
+      state.data = state.temp.map(item=>{
+        if(item.id === payload.id){
+          return payload
+        }
+        return item
+      })
     },
     [moveTodoItems.rejected]: (state, { payload }) => {
       state.loading = false
