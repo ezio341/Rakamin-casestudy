@@ -45,11 +45,11 @@ export default function Login(){
           <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3" controlId="formGroupEmail">
               <Form.Label className='s-12 font-weight-700'>Email address</Form.Label>
-              <Form.Control type="email" placeholder="Enter email" />
+              <Form.Control defaultValue="arga@mail.com" type="email" placeholder="Enter email" />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formGroupPassword">
               <Form.Label className='s-12 font-weight-700'>Password</Form.Label>
-              <Form.Control type="password" placeholder="Password" />
+              <Form.Control defaultValue="password" type="password" placeholder="Password" />
             </Form.Group>
             <Button className='d-flex align-items-center gap-1' type='submit' variant='primary'>
               Sign In

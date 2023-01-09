@@ -3,7 +3,7 @@ import Close from "../icons/x.svg"
 
 export default function ModalCustom({show, setShow, Footer, HeaderIcon, title, Body, closable}){
   return (
-    <Modal contentClassName="border-0 radius-10 p-4" show={show} onHide={()=>setShow(false)}>
+    <Modal centered contentClassName="border-0 radius-10 p-4" show={show} onHide={()=>setShow(false)}>
     <ModalHeader className="border-0 pt-0 px-0 pb-4">
       <div className="d-flex align-items-center justify-content-between w-100">
         <div className="d-flex align-items-center gap-2">
