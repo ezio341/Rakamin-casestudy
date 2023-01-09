@@ -124,11 +124,11 @@ export default function BoardItem({title, progress, groupId, itemId}){
             <Dropdown.Menu>
               {
                 settings.map((setting, i)=>(
+                  !setting.disabled &&
                   <Dropdown.Item className={`s-14 font-weight-600 py-0 my-2 hover-${setting.activeVariant}` }
                   onClick={(e)=>setting.onClick(e)} 
                   onMouseEnter={()=>{swapSetting(i, {...setting, active: true})}}
                   onMouseLeave={()=>{setSettings(settings.map(setting=>({...setting, active: false})))}}
-                  disabled={setting.disabled}
                   key={i}>
                     <span className="me-2">
                       <Image src={setting.active? setting.iconAlt: setting.icon}/>
