@@ -178,7 +178,7 @@ export default function BoardItem({title, progress, groupId, itemId}){
         }
         show={EditTaskModalShow}
         setShow={setEditTaskModalShow}
-        title="Create Task"
+        title="Edit Task"
         closable
       />
     </div>

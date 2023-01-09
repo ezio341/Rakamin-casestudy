@@ -23,7 +23,7 @@ export default function ModalCustom({show, setShow, Footer, HeaderIcon, title, B
         }
       </div>
     </ModalHeader>
-    <ModalBody className="s-14 font-weight-400 px-0 pt-0 pb-4">
+    <ModalBody className={`s-14 font-weight-400 px-0 pt-0 ${Footer?'pb-4':'pb-0'}`}>
       {Body}
     </ModalBody>
     <ModalFooter className="border-0 pb-0 px-0 pt-0">
