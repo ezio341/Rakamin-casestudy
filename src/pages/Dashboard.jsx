@@ -12,7 +12,7 @@ export default function Dashboard(){
     if(!data.length && userToken){ 
       dispatch(getTodos(userToken))
     }
-  })
+  },[])
   const variants = ['primary', 'success', 'warning', 'danger']
   return (
     <div className='board-container py-4 ps-3 ps-md-0'>

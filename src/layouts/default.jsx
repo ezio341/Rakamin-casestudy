@@ -5,9 +5,32 @@ import ModalCustom from '../components/ModalCustom'
 import { useState } from 'react'
 import { Outlet } from 'react-router-dom'
 import AuthStatus from '../components/AuthStatus'
+import { useDispatch, useSelector } from 'react-redux'
+import { createTodoGroup } from '../features/todoGroup/todoGroupAction'
 
 export default function DefaultLayout(){
   const [createGroupModalShow, setCreateGroupModalShow] = useState(false)
+  const dispatch = useDispatch()
+  const {userToken} = useSelector(state=>state.auth)
+
+  const onSubmitGroup = (evt) =>{
+    evt.preventDefault()
+    const form = evt.currentTarget
+    let [title, description] = [evt.target[0].value, evt.target[1].value]
+    if(!form.checkValidity()){
+      evt.stopPropagation()
+    }else{
+      dispatch(createTodoGroup(
+        {
+          bearerToken: userToken,
+          data: {
+            title, description
+          }
+        }
+      ))
+      setCreateGroupModalShow(false)
+    }
+  }
 
   return (
     <>
@@ -36,22 +59,20 @@ export default function DefaultLayout(){
       {/* Modal Create Task */}
       <ModalCustom 
         Body={
-          <Form>
+          <Form onSubmit={onSubmitGroup}>
           <Form.Group className="mb-3" controlId="taskName">
             <Form.Label className='s-12 font-weight-400'>Title</Form.Label>
             <Form.Control type="text" placeholder="Type your new group" />
           </Form.Group>
-          <Form.Group className="mb-3" controlId="progress">
+          <Form.Group className="mb-4" controlId="progress">
             <Form.Label className='s-12 font-weight-400'>Description</Form.Label>
             <Form.Control as='textarea' placeholder="Your group description" />
           </Form.Group>
-        </Form>
-        }
-        Footer={
-          <>
+          <div className='d-flex justify-content-end gap-2'>
             <Button onClick={()=>setCreateGroupModalShow(false)} className="me-2 m-0 text-neutral-90 shadow" variant="white">Cancel</Button>
-            <Button className="m-0 shadow">Save Task</Button>
-          </>
+            <Button type='submit' className="m-0 shadow">Save Task</Button>
+          </div>
+          </Form>
         }
         show={createGroupModalShow}
         setShow={setCreateGroupModalShow}

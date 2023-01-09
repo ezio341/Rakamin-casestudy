@@ -10,7 +10,11 @@ const initialState = {
 const todoGroupSlice = createSlice({
   name: 'todoItem',
   initialState,
-  reducers: {},
+  reducers: {
+    setData: (data, state) => {
+      state.data = data
+    }
+  },
   extraReducers: {
     // get todo
     [getTodoItems.pending]: (state) => {
