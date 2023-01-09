@@ -12,8 +12,11 @@ import DeleteDanger from "../icons/bin-danger.svg"
 import AlertDanger from "../icons/alert-danger.svg"
 import { useState } from "react";
 import ModalCustom from "./ModalCustom";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteTodoItems, editTodoItems, getTodoItems } from "../features/todoItem/todoItemAction";
+import { getTodos } from "../features/todoGroup/todoGroupAction";
 
-export default function BoardItem({title, progress}){ 
+export default function BoardItem({title, progress, groupId, itemId}){ 
   const [deleteModalShow, setDeleteModalShow] = useState(false)
   const [EditTaskModalShow, setEditTaskModalShow] = useState(false)
   const [settings, setSettings] = useState([
@@ -60,6 +63,35 @@ export default function BoardItem({title, progress}){
     })
     setSettings(newSettings)
   }
+
+  const dispatch = useDispatch()
+  const {userToken} = useSelector(state=>state.auth)
+
+  const onClickSaveTask = (evt)=>{
+    evt.preventDefault()
+    const form = evt.currentTarget
+    let [name, progress_percentage] = [evt.target[0].value, evt.target[1].value]
+    if(!form.checkValidity()){
+      evt.stopPropagation()
+    }else{
+      dispatch(editTodoItems(
+        {
+          groupId,
+          bearerToken: userToken,
+          data: {
+            name, progress_percentage
+          },
+          itemId
+        }
+      ))
+      setEditTaskModalShow(false)
+    }
+  }
+
+  const onDeleteItem=()=>{
+    dispatch(deleteTodoItems({groupId, bearerToken:userToken, itemId}))
+    setDeleteModalShow(false)
+  }
   return (
     <div className="board-item">
       <div className="title s-14 font-weight-700">
@@ -101,7 +133,7 @@ export default function BoardItem({title, progress}){
         Footer={
           <>
             <Button onClick={()=>setDeleteModalShow(false)} className="me-2 m-0 text-neutral-90 shadow" variant="white">Cancel</Button>
-            <Button className="m-0 shadow" variant="danger">Delete</Button>
+            <Button onClick={onDeleteItem} className="m-0 shadow" variant="danger">Delete</Button>
           </>
         }
         HeaderIcon={AlertDanger}
@@ -114,22 +146,20 @@ export default function BoardItem({title, progress}){
       {/* Modal Edit Task */}
       <ModalCustom 
         Body={
-          <Form>
+          <Form onSubmit={onClickSaveTask}>
           <Form.Group className="mb-3" controlId="taskName">
             <Form.Label className='s-12 font-weight-700'>Task Name</Form.Label>
-            <Form.Control type="text" placeholder="Type your task" />
+            <Form.Control defaultValue={title} type="text" placeholder="Type your task" />
           </Form.Group>
-          <Form.Group className="mb-3" controlId="progress">
+          <Form.Group className="mb-4" controlId="progress">
             <Form.Label className='s-12 font-weight-700'>Progress</Form.Label>
-            <Form.Control type="number" max={100} min={0} placeholder="70%" />
+            <Form.Control defaultValue={progress} type="number" max={100} min={0} placeholder="70%" />
           </Form.Group>
+          <div className="d-flex justify-content-end gap-2">
+            <Button onClick={()=>setEditTaskModalShow(false)} className="m-0 text-neutral-90 shadow" variant="white">Cancel</Button>
+            <Button type="submit" className="m-0 shadow">Save Task</Button>
+          </div>
         </Form>
-        }
-        Footer={
-          <>
-            <Button onClick={()=>setEditTaskModalShow(false)} className="me-2 m-0 text-neutral-90 shadow" variant="white">Cancel</Button>
-            <Button className="m-0 shadow">Save Task</Button>
-          </>
         }
         show={EditTaskModalShow}
         setShow={setEditTaskModalShow}

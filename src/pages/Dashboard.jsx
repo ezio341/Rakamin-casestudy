@@ -1,17 +1,18 @@
 import { useDispatch, useSelector } from 'react-redux'
 import BoardGroup from '../components/BoardGroup'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { getTodos } from '../features/todoGroup/todoGroupAction'
 
 export default function Dashboard(){
   const {data, loading, error} = useSelector(state=>state.todoGroup)
   const {userToken} = useSelector(state=>state.auth)
   const dispatch = useDispatch()
+  
   useEffect(()=>{
     if(!data.length && userToken){ 
       dispatch(getTodos(userToken))
     }
-  }, [])
+  })
   const variants = ['primary', 'success', 'warning', 'danger']
   return (
     <div className='board-container py-4 ps-3 ps-md-0'>

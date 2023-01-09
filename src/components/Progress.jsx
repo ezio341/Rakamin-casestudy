@@ -6,12 +6,12 @@ export default function Progress({percent}){
     <Row className="align-items-center">
       <Col>
         <span>
-          <ProgressBar now={percent} variant={percent===100?'success':'primary'} className="radius-16"/>
+          <ProgressBar now={percent} variant={percent>=100?'success':'primary'} className="radius-16"/>
         </span>
       </Col>
       <Col xs="auto" md="auto" className="ps-0 pe-1">
         {
-          percent === 100 ?
+          percent >= 100 ?
           <Image src={Checklist} height={16} width={16}/>
           :
           <span className="text-neutral-70 s-12 font-weight-400">{percent}%</span>
