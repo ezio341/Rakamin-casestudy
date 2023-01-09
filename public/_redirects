@@ -1,2 +1,2 @@
-/      /v1            200         
-/v1    /index.html    200
+/*      /v1            301
+/v1/*    /index.html    301
