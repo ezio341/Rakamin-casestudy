@@ -7,7 +7,7 @@ export default function FallbackRoute({relativePath}){
 
   const pathArr = location.pathname.split('/')
   if(pathArr[1] !== relativePath && pathArr.length > 1){
-    return <Navigate to={`/${relativePath}/${pathArr.slice(1, pathArr.length).join('/')}`}/>
+    return <Navigate to={`/${relativePath}/${pathArr.slice(1, pathArr.length).join('/')}`} replace/>
   }
   return (<NotFound />)
 }

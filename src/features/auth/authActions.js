@@ -32,3 +32,34 @@ export const login = createAsyncThunk(
     }
   }
 )
+
+export const register = createAsyncThunk(
+  'auth/register',
+  async ({ name, email, password, password_confirmation}, { rejectWithValue }) => {
+    try {
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        method: 'POST',
+        body: JSON.stringify({name, email, password, password_confirmation})
+      }
+      const res = await fetch(
+        `${apiURL}/signup`,
+        config
+      ).then(res=>res.json())
+      if(res.auth_token){
+        localStorage.setItem('user_token', res.auth_token)
+        return res
+      }
+      throw Error(res.message)
+    } catch (error) {
+      // return custom error message from backend if present
+      if (error.response && error.response.data.message) {
+        return rejectWithValue(error.response.data.message)
+      } else {
+        return rejectWithValue(error.message)
+      }
+    }
+  }
+)
