@@ -130,8 +130,8 @@ export default function BoardItem({title, progress, groupId, itemId}){
                   onMouseEnter={()=>{swapSetting(i, {...setting, active: true})}}
                   onMouseLeave={()=>{setSettings(settings.map(setting=>({...setting, active: false})))}}
                   key={i}>
-                    <span className="me-2">
-                      <Image src={setting.active? setting.iconAlt: setting.icon}/>
+                    <span className="me-3">
+                      <Image src={setting.active? setting.iconAlt: setting.icon} height={24} width={24}/>
                     </span>
                     {setting.text}
                   </Dropdown.Item>
