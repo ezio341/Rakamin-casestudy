@@ -51,13 +51,19 @@ export default function Login(){
               <Form.Label className='s-12 font-weight-700'>Password</Form.Label>
               <Form.Control defaultValue="password" type="password" placeholder="Password" />
             </Form.Group>
-            <Button className='d-flex align-items-center gap-1' type='submit' variant='primary'>
-              Sign In
-              {
-                loading && 
-                <Spinner size='sm' variant='white'/>
-              }
-            </Button>
+            <div className='d-flex justify-content-between align-items-center'>
+              <Button className='d-flex align-items-center gap-1' type='submit' variant='primary'>
+                Sign In
+                {
+                  loading && 
+                  <Spinner size='sm' variant='white'/>
+                }
+              </Button>
+              <div className='d-flex gap-2'>
+                dont have an account? 
+                <a href='/register'>Register</a>
+              </div>
+            </div>
           </Form>
         </Col>
       </Row>
