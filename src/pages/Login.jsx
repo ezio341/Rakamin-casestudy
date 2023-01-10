@@ -1,6 +1,6 @@
 import {Form, Container, Row, Col, Button, Alert, Spinner} from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, Navigate, useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { login } from '../features/auth/authActions'
 import { useEffect, useState } from 'react'
 
